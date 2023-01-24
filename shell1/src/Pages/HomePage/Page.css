@@ -1,0 +1,8 @@
+.Page {
+	text-align: center;
+	background-color: coral;
+	padding: 2em;
+	display: grid;
+	height: 100%;
+	place-content: center;
+}

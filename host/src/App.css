@@ -1,0 +1,9 @@
+.App {
+	text-align: center;
+	background-color: burlywood;
+}
+
+.App h1 {
+	padding: 1em;
+	margin: 0;
+}
