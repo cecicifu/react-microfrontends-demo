@@ -1,8 +1,18 @@
+/**
+ * @param {string} remoteName
+ * @param {import('../../constants').RemotesArray} remotes
+ * @returns {string} A remote URL
+ */
 export const findRemoteUrl = (remoteName, remotes) => {
 	const remote = remotes.find((r) => r.name === remoteName)
-	return remote?.url || ""
+	return remote?.url ?? ""
 }
 
+/**
+ * @param {string} url
+ * @param {string} remoteName
+ * @returns {Promise} A fetched container
+ */
 export const fetchRemote = (url, remoteName) =>
 	new Promise((resolve, reject) => {
 		// We define a script tag to use the browser for fetching the remoteEntry.js file
@@ -21,7 +31,6 @@ export const fetchRemote = (url, remoteName) =>
 					try {
 						return window[remoteName].init(arg)
 					} catch (e) {
-						console.error(e)
 						console.error(`Failed to initialize remote: ${remoteName}`)
 						reject(e)
 					}
@@ -33,6 +42,13 @@ export const fetchRemote = (url, remoteName) =>
 		document.head.appendChild(script)
 	})
 
+/**
+ * @param {string} remoteName
+ * @param {string} remoteUrl
+ * @param {string} moduleName
+ * @param {string} scope
+ * @returns {Promise} A remote component
+ */
 export const loadComponent =
 	(remoteName, remoteUrl, moduleName, scope = "default") =>
 	async () => {
